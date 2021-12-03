@@ -12,15 +12,15 @@ class MyApp extends StatefulWidget {
 }
 
 class Choice {
-  final String title;
-  final IconData icon;
+  final String? title;
+  final IconData? icon;
 
   const Choice({this.title, this.icon});
 }
 
 class _State extends State<MyApp> with SingleTickerProviderStateMixin {
 
-  TabController _controller;
+  TabController? _controller;
   List<Choice> _items = const <Choice>[
     const Choice(title: 'CAR', icon: Icons.directions_car),
     const Choice(title: 'BICYCLE', icon: Icons.directions_bike),
@@ -39,22 +39,22 @@ class _State extends State<MyApp> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Name here'),
-        bottom: new PreferredSize(
-          preferredSize: const Size.fromHeight(48.0),
-          child: new Theme(
-              data: Theme.of(context).copyWith(accentColor: Colors.white),
-              child: new Container(
-                height: 48.0,
-                alignment: Alignment.center,
-                child: new TabPageSelector(controller: _controller,),
-              )
-          ),
+        appBar: new AppBar(
+          title: new Text('Name here'),
+          bottom: new PreferredSize(
+            preferredSize: const Size.fromHeight(48.0),
+            child: new Theme(
+                data: Theme.of(context).copyWith(accentColor: Colors.white),
+                child: new Container(
+                  height: 48.0,
+                  alignment: Alignment.center,
+                  child: new TabPageSelector(controller: _controller,),
+                )
+            ),
 
+          ),
         ),
-      ),
-      body: new TabBarView(
+        body: new TabBarView(
           controller: _controller,
           children: _items.map((Choice item){
             return new Container(
@@ -62,7 +62,7 @@ class _State extends State<MyApp> with SingleTickerProviderStateMixin {
               child: new Center(
                 child: new Column(
                   children: <Widget>[
-                    new Text(item.title),
+                    new Text(item.title!),
                     new Icon(item.icon, size: 120.0,)
                   ],
                 ),
@@ -70,7 +70,7 @@ class _State extends State<MyApp> with SingleTickerProviderStateMixin {
 
             );
           }).toList(),
-      )
+        )
     );
   }
 }
